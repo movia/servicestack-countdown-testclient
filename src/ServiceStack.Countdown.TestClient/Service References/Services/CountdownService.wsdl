@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://schemas.moviatrafik.dk/countdown/2014" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CountdownService" targetNamespace="http://schemas.moviatrafik.dk/countdown/2014" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="BasicHttpBinding_ICountdownService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <http:BasicAuthentication xmlns:http="http://schemas.microsoft.com/ws/06/2004/policy/http" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.moviatrafik.dk/countdown/2014" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="Version">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="VersionResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="VersionResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDeviationMessageSet">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDeviationMessageSetResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GetDeviationMessageSetResult" nillable="true" type="tns:deviationMessageSet" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="deviationMessageSet">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="time" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="stopPoints" nillable="true" type="tns:ArrayOfdeviationMessageSet.stopPoint" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="deviationMessageSet" nillable="true" type="tns:deviationMessageSet" />
+      <xs:complexType name="ArrayOfdeviationMessageSet.stopPoint">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="deviationMessageSet.stopPoint" nillable="true" type="tns:deviationMessageSet.stopPoint" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfdeviationMessageSet.stopPoint" nillable="true" type="tns:ArrayOfdeviationMessageSet.stopPoint" />
+      <xs:complexType name="deviationMessageSet.stopPoint">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:int" />
+          <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="deviations" nillable="true" type="tns:ArrayOfdeviationMessageSet.stopPoint.deviation" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="deviationMessageSet.stopPoint" nillable="true" type="tns:deviationMessageSet.stopPoint" />
+      <xs:complexType name="ArrayOfdeviationMessageSet.stopPoint.deviation">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="deviationMessageSet.stopPoint.deviation" nillable="true" type="tns:deviationMessageSet.stopPoint.deviation" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfdeviationMessageSet.stopPoint.deviation" nillable="true" type="tns:ArrayOfdeviationMessageSet.stopPoint.deviation" />
+      <xs:complexType name="deviationMessageSet.stopPoint.deviation">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:decimal" />
+          <xs:element minOccurs="0" name="header" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="text" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="validFrom" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="validTo" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="lastModifiedUtc" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="deviationMessageSet.stopPoint.deviation" nillable="true" type="tns:deviationMessageSet.stopPoint.deviation" />
+      <xs:element name="GetDepartureTimeSet">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDepartureTimeSetResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GetDepartureTimeSetResult" nillable="true" type="tns:departureTimeSet" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="departureTimeSet">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="stopPoints" nillable="true" type="tns:ArrayOfdepartureTimeSet.stopPoint" />
+          <xs:element minOccurs="0" name="time" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="departureTimeSet" nillable="true" type="tns:departureTimeSet" />
+      <xs:complexType name="ArrayOfdepartureTimeSet.stopPoint">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="departureTimeSet.stopPoint" nillable="true" type="tns:departureTimeSet.stopPoint" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfdepartureTimeSet.stopPoint" nillable="true" type="tns:ArrayOfdepartureTimeSet.stopPoint" />
+      <xs:complexType name="departureTimeSet.stopPoint">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:int" />
+          <xs:element minOccurs="0" name="lineDestinations" nillable="true" type="tns:ArrayOfdepartureTimeSet.stopPoint.lineDestination" />
+          <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="departureTimeSet.stopPoint" nillable="true" type="tns:departureTimeSet.stopPoint" />
+      <xs:complexType name="ArrayOfdepartureTimeSet.stopPoint.lineDestination">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="departureTimeSet.stopPoint.lineDestination" nillable="true" type="tns:departureTimeSet.stopPoint.lineDestination" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfdepartureTimeSet.stopPoint.lineDestination" nillable="true" type="tns:ArrayOfdepartureTimeSet.stopPoint.lineDestination" />
+      <xs:complexType name="departureTimeSet.stopPoint.lineDestination">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="departures" nillable="true" type="tns:ArrayOfdepartureTimeSet.stopPoint.lineDestination.departureTime" />
+          <xs:element minOccurs="0" name="designation" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="destination" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="departureTimeSet.stopPoint.lineDestination" nillable="true" type="tns:departureTimeSet.stopPoint.lineDestination" />
+      <xs:complexType name="ArrayOfdepartureTimeSet.stopPoint.lineDestination.departureTime">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="departureTimeSet.stopPoint.lineDestination.departureTime" nillable="true" type="tns:departureTimeSet.stopPoint.lineDestination.departureTime" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfdepartureTimeSet.stopPoint.lineDestination.departureTime" nillable="true" type="tns:ArrayOfdepartureTimeSet.stopPoint.lineDestination.departureTime" />
+      <xs:complexType name="departureTimeSet.stopPoint.lineDestination.departureTime">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:long" />
+          <xs:element minOccurs="0" name="time" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="timeIsReal" type="xs:boolean" />
+          <xs:element minOccurs="0" name="timeLeft" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="departureTimeSet.stopPoint.lineDestination.departureTime" nillable="true" type="tns:departureTimeSet.stopPoint.lineDestination.departureTime" />
+      <xs:element name="GetStopPointSet">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetStopPointSetResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GetStopPointSetResult" nillable="true" type="tns:stopPointSet" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="stopPointSet">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="stopPoints" nillable="true" type="tns:ArrayOfstopPointSet.stopPoint" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="stopPointSet" nillable="true" type="tns:stopPointSet" />
+      <xs:complexType name="ArrayOfstopPointSet.stopPoint">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="stopPointSet.stopPoint" nillable="true" type="tns:stopPointSet.stopPoint" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfstopPointSet.stopPoint" nillable="true" type="tns:ArrayOfstopPointSet.stopPoint" />
+      <xs:complexType name="stopPointSet.stopPoint">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:int" />
+          <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="eastingCoordinate" type="xs:decimal" />
+          <xs:element minOccurs="0" name="northingCoordinate" type="xs:decimal" />
+          <xs:element minOccurs="0" name="lineDirections" nillable="true" type="tns:ArrayOfstopPointSet.stopPoint.lineDirection" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="stopPointSet.stopPoint" nillable="true" type="tns:stopPointSet.stopPoint" />
+      <xs:complexType name="ArrayOfstopPointSet.stopPoint.lineDirection">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="stopPointSet.stopPoint.lineDirection" nillable="true" type="tns:stopPointSet.stopPoint.lineDirection" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfstopPointSet.stopPoint.lineDirection" nillable="true" type="tns:ArrayOfstopPointSet.stopPoint.lineDirection" />
+      <xs:complexType name="stopPointSet.stopPoint.lineDirection">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:long" />
+          <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="designation" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="stopPointSet.stopPoint.lineDirection" nillable="true" type="tns:stopPointSet.stopPoint.lineDirection" />
+      <xs:element name="PostStatusReportSet">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ReportSet" nillable="true" type="tns:statusReportSet" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="statusReportSet">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="statusReports" nillable="true" type="tns:ArrayOfstatusReportSet.statusReport" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="statusReportSet" nillable="true" type="tns:statusReportSet" />
+      <xs:complexType name="ArrayOfstatusReportSet.statusReport">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="statusReportSet.statusReport" nillable="true" type="tns:statusReportSet.statusReport" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfstatusReportSet.statusReport" nillable="true" type="tns:ArrayOfstatusReportSet.statusReport" />
+      <xs:complexType name="statusReportSet.statusReport">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="batteryLevel" type="xs:unsignedByte" />
+          <xs:element minOccurs="0" name="deviceId" type="xs:long" />
+          <xs:element minOccurs="0" name="displayMode" type="xs:unsignedByte" />
+          <xs:element minOccurs="0" name="lastUpdate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="lightMode" type="xs:unsignedByte" />
+          <xs:element minOccurs="0" name="lightSensorSensitivity" type="xs:unsignedByte" />
+          <xs:element minOccurs="0" name="stopPointId" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="statusReportSet.statusReport" nillable="true" type="tns:statusReportSet.statusReport" />
+      <xs:element name="PostStatusReportSetResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="PostStatusReportSetResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ICountdownService_Version_InputMessage">
+    <wsdl:part name="parameters" element="tns:Version" />
+  </wsdl:message>
+  <wsdl:message name="ICountdownService_Version_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICountdownService_GetDeviationMessageSet_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeviationMessageSet" />
+  </wsdl:message>
+  <wsdl:message name="ICountdownService_GetDeviationMessageSet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeviationMessageSetResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICountdownService_GetDepartureTimeSet_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepartureTimeSet" />
+  </wsdl:message>
+  <wsdl:message name="ICountdownService_GetDepartureTimeSet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepartureTimeSetResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICountdownService_GetStopPointSet_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStopPointSet" />
+  </wsdl:message>
+  <wsdl:message name="ICountdownService_GetStopPointSet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStopPointSetResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICountdownService_PostStatusReportSet_InputMessage">
+    <wsdl:part name="parameters" element="tns:PostStatusReportSet" />
+  </wsdl:message>
+  <wsdl:message name="ICountdownService_PostStatusReportSet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PostStatusReportSetResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICountdownService">
+    <wsdl:operation name="Version">
+      <wsdl:input wsaw:Action="http://schemas.moviatrafik.dk/countdown/2014/ICountdownService/Version" message="tns:ICountdownService_Version_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.moviatrafik.dk/countdown/2014/ICountdownService/VersionResponse" message="tns:ICountdownService_Version_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeviationMessageSet">
+      <wsdl:input wsaw:Action="http://schemas.moviatrafik.dk/countdown/2014/ICountdownService/GetDeviationMessageSet" message="tns:ICountdownService_GetDeviationMessageSet_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.moviatrafik.dk/countdown/2014/ICountdownService/GetDeviationMessageSetResponse" message="tns:ICountdownService_GetDeviationMessageSet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartureTimeSet">
+      <wsdl:input wsaw:Action="http://schemas.moviatrafik.dk/countdown/2014/ICountdownService/GetDepartureTimeSet" message="tns:ICountdownService_GetDepartureTimeSet_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.moviatrafik.dk/countdown/2014/ICountdownService/GetDepartureTimeSetResponse" message="tns:ICountdownService_GetDepartureTimeSet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStopPointSet">
+      <wsdl:input wsaw:Action="http://schemas.moviatrafik.dk/countdown/2014/ICountdownService/GetStopPointSet" message="tns:ICountdownService_GetStopPointSet_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.moviatrafik.dk/countdown/2014/ICountdownService/GetStopPointSetResponse" message="tns:ICountdownService_GetStopPointSet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PostStatusReportSet">
+      <wsdl:input wsaw:Action="http://schemas.moviatrafik.dk/countdown/2014/ICountdownService/PostStatusReportSet" message="tns:ICountdownService_PostStatusReportSet_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.moviatrafik.dk/countdown/2014/ICountdownService/PostStatusReportSetResponse" message="tns:ICountdownService_PostStatusReportSet_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ICountdownService" type="tns:ICountdownService">
+    <wsp:PolicyReference URI="#BasicHttpBinding_ICountdownService_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Version">
+      <soap:operation soapAction="http://schemas.moviatrafik.dk/countdown/2014/ICountdownService/Version" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeviationMessageSet">
+      <soap:operation soapAction="http://schemas.moviatrafik.dk/countdown/2014/ICountdownService/GetDeviationMessageSet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartureTimeSet">
+      <soap:operation soapAction="http://schemas.moviatrafik.dk/countdown/2014/ICountdownService/GetDepartureTimeSet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStopPointSet">
+      <soap:operation soapAction="http://schemas.moviatrafik.dk/countdown/2014/ICountdownService/GetStopPointSet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostStatusReportSet">
+      <soap:operation soapAction="http://schemas.moviatrafik.dk/countdown/2014/ICountdownService/PostStatusReportSet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CountdownService">
+    <wsdl:port name="BasicHttpBinding_ICountdownService" binding="tns:BasicHttpBinding_ICountdownService">
+      <soap:address location="https://wsilb.moviatrafik.dk/Countdown/v2/CountdownService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F60DB64E-BA21-4648-9F5E-F70C1BAF028F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStack.Countdown.TestClient", "ServiceStack.Countdown.TestClient\ServiceStack.Countdown.TestClient.csproj", "{12340E1F-7B1B-4116-AB03-0C3217D128AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Any CPU = Development|Any CPU
+		Production|Any CPU = Production|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12340E1F-7B1B-4116-AB03-0C3217D128AB}.Development|Any CPU.ActiveCfg = Development|Any CPU
+		{12340E1F-7B1B-4116-AB03-0C3217D128AB}.Development|Any CPU.Build.0 = Development|Any CPU
+		{12340E1F-7B1B-4116-AB03-0C3217D128AB}.Production|Any CPU.ActiveCfg = Production|Any CPU
+		{12340E1F-7B1B-4116-AB03-0C3217D128AB}.Production|Any CPU.Build.0 = Production|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{12340E1F-7B1B-4116-AB03-0C3217D128AB} = {F60DB64E-BA21-4648-9F5E-F70C1BAF028F}
+	EndGlobalSection
+EndGlobal
