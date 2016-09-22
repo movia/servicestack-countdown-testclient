@@ -44,15 +44,33 @@ namespace ServiceStack.Countdown.TestClient
 
                 Console.WriteLine();
 
+                //// Test PostStatusReportSet Method
+                //Console.WriteLine($"Subscribing to stop point id '{stop}' ...");
+                //var sub = client.PostStatusReportSet(new statusReportSet()
+                //{
+                //    statusReports = new[] { new statusReportSet.statusReport()
+                //    {
+                //        deviceId = 1,
+                //        lastUpdate = DateTime.UtcNow,
+                //        stopPointId = stopPoints.stopPoints.First().id
+                //    }
+                //}
+                //});
+
                 // Test PostStatusReportSet Method
-                Console.WriteLine($"Subscribing to stop point id '{stopPoints.stopPoints.First().id}' ...");
+                Console.Write("Enter stop number: ");
+                var stop = Console.ReadLine();
+                Console.Write("Enter device number: ");
+                var device = Console.ReadLine();
+
+                Console.WriteLine($"Subscribing to stop point id '{stop}' to device '{device}'.");
                 var sub = client.PostStatusReportSet(new statusReportSet()
                 {
                     statusReports = new[] { new statusReportSet.statusReport()
                     {
-                        deviceId = 1,
+                        deviceId = Int32.Parse(device),
                         lastUpdate = DateTime.UtcNow,
-                        stopPointId = stopPoints.stopPoints.First().id
+                        stopPointId = Int32.Parse(stop)
                     }
                 }
                 });
@@ -76,6 +94,25 @@ namespace ServiceStack.Countdown.TestClient
                 });
 
                 Console.WriteLine();
+
+                // Test GetDeviationMessageSet Method
+                Console.WriteLine("Getting Deviations ...");
+
+                var dev1 = client.GetDeviationMessageSet();
+                Console.WriteLine($"Received deviations for {dev1.stopPoints.Count():n0} stop points. Displaying first 10 stops:");
+                Console.WriteLine($"{"Id",5}  {"Name"}");
+                dev1.stopPoints.Take(10).ToList().ForEach(x => {
+                    Console.WriteLine($" {x.id,5}  {x.name}");
+                    Console.WriteLine($"                   {"Deviation text",5}    ");
+                    x.deviations.Take(1).ToList().ForEach(y =>
+                    {
+                        y.header.Take(1).ToList().ForEach(stopDev => Console.WriteLine($"                   {y.header,5}    "));
+                        Console.WriteLine();
+                    });
+                });
+
+                Console.WriteLine();
+
             }
             catch (Exception ex)
             {
