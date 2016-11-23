@@ -44,19 +44,6 @@ namespace ServiceStack.Countdown.TestClient
 
                 Console.WriteLine();
 
-                //// Test PostStatusReportSet Method
-                //Console.WriteLine($"Subscribing to stop point id '{stop}' ...");
-                //var sub = client.PostStatusReportSet(new statusReportSet()
-                //{
-                //    statusReports = new[] { new statusReportSet.statusReport()
-                //    {
-                //        deviceId = 1,
-                //        lastUpdate = DateTime.UtcNow,
-                //        stopPointId = stopPoints.stopPoints.First().id
-                //    }
-                //}
-                //});
-
                 // Test PostStatusReportSet Method
                 Console.Write("Enter stop number: ");
                 var stop = Console.ReadLine();
